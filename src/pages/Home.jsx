@@ -6,7 +6,7 @@ function Home() {
     <div className="home-container">
       <Link to="UploadPage">
         <div className="link-container">
-          <p>Let's Go <span id="arrow">→</span></p>
+          <p>Get Started <span id="arrow">→</span></p>
         </div>
       </Link>
       <Outlet />

@@ -1,25 +1,29 @@
-import React, { useState } from "react";
 import "./FileUploaderStyle.css";
 import { useNavigate } from "react-router-dom";
+import Dropzone from "react-dropzone";
 
 function FileUploader() {
-  let [fileName, changeFileName] = useState("");
-
   const navigate = useNavigate();
-
-  let handleFileName = (e) => changeFileName(e.target.value);
 
   let handleBack = () => navigate(-1);
 
   return (
     <>
       <button className="link-container" onClick={handleBack}>
-        ‹
+        ← Go back
       </button>
-      <div className="uploader-body">
-        <input type="file" onChange={handleFileName} />
-        <p>File : {fileName}</p>
-      </div>
+      <Dropzone onDrop={(acceptedFile) => console.log(acceptedFile)}>
+        {({ getRootProps, getInputProps, isDragActive }) => (
+            <div className="uploader-body" {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <p>Drop the files here... </p>
+              ) : (
+                <p>Drag 'n' drop some file here, or click on select files</p>
+              )}
+            </div>
+        )}
+      </Dropzone>
     </>
   );
 }
